@@ -27,3 +27,5 @@ RUN acmetool quickstart
 # Install worker queue startup script
 
 COPY run_worker_queue.sh /usr/local/bin/run_worker_queue.sh
+
+ENTRYPOINT ["run_worker_queue.sh"]
