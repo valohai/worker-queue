@@ -25,3 +25,14 @@ This installs Docker and creates a systemd service that runs the worker queue wi
 QUEUE_ADDRESS is the `xxx.vqueue.net` address configured in Valohai's AWS Route 53 and REDIS_PASSWORD is an agreed-upon password for Redis.
 
 Running the above is equal to running the setup script directly: `sudo ./setup.sh QUEUE_ADDRESS REDIS_PASSWORD`
+
+### Manual Setup
+
+If you want to install the worker queue without running the setup script `setup.sh` at all, here are the steps required:
+
+- Prepare a Linux host machine with Docker installed
+- Run `docker pull valohai/worker-queue:latest`
+- Copy `host/worker-queue.service` from this repository to `/etc/systemd/system/worker-queue.service`
+- Replace the following values in `etc/systemd/system/worker-queue.service`: `$QUEUE_ADDRESS` with your `xxx.vqueue.net` address and `$REDIS_PASSWORD` with an agreed-upon password for Redis
+- Run `systemctl enable worker-queue`
+- Run `systemctl start worker-queue`
