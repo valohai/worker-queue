@@ -46,7 +46,9 @@ ExecStart=/usr/bin/docker run --rm \
                               --network host \
                               --mount source=acme,target=/var/lib/acme \
                               --mount source=redis,target=/var/lib/redis \
-                              $DOCKER_IMAGE $QUEUE_ADDRESS $REDIS_PASSWORD
+                              -e QUEUE_ADDRESS=$QUEUE_ADDRESS \
+                              -e REDIS_PASSWORD=$REDIS_PASSWORD \
+                              $DOCKER_IMAGE
 ExecStop=/usr/bin/docker stop %n
 
 [Install]
