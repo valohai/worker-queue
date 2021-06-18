@@ -8,8 +8,8 @@ fi
 QUEUE_ADDRESS=$1
 REDIS_PASSWORD=$2
 
-if test ! -d /var/lib/acme/live/$QUEUE_ADDRESS; then
-    acmetool want $QUEUE_ADDRESS
+if test ! -d /var/lib/acme/live/"$QUEUE_ADDRESS"; then
+    acmetool want "$QUEUE_ADDRESS"
 fi
 
 sed -i "s|# requirepass foobared|requirepass "$REDIS_PASSWORD"|" /etc/redis/redis.conf
