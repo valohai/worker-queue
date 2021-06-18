@@ -1,12 +1,15 @@
 #!/bin/bash
 
-if test "$#" -ne 2; then
-    >&2 echo "Invalid amount of parameters, QUEUE_ADDRESS and REDIS_PASSWORD required"
+if [ -z "$QUEUE_ADDRESS" ]; then
+    >&2 echo "QUEUE_ADDRESS not set"
     exit 1
 fi
 
-QUEUE_ADDRESS=$1
-REDIS_PASSWORD=$2
+if [ -z "$REDIS_PASSWORD" ]; then
+    >&2 echo "REDIS_PASSWORD not set"
+    exit 1
+fi
+
 DOCKER_IMAGE=valohai/worker-queue:latest
 
 # Upgrade system
