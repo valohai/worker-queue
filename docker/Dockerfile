@@ -16,7 +16,7 @@ COPY redis/redis.conf /etc/redis/redis.conf
 
 # Install acmetool
 
-RUN apt-get install -y ca-certificates libcap2
+RUN apt-get install -y ca-certificates cron libcap2
 
 COPY acmetool/acmetool-v2-beta-linux /usr/bin/acmetool
 
