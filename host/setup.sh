@@ -10,6 +10,9 @@ if [ -z "$REDIS_PASSWORD" ]; then
     exit 1
 fi
 
+# Make bash more strict about errors
+set -euo pipefail
+
 DOCKER_IMAGE=valohai/worker-queue:latest
 
 # Upgrade system
