@@ -10,6 +10,9 @@ if [ -z "$REDIS_PASSWORD" ]; then
     exit 1
 fi
 
+# Make bash more strict about errors
+set -euo pipefail
+
 if test ! -d /var/lib/acme/live/"$QUEUE_ADDRESS"; then
     acmetool want "$QUEUE_ADDRESS"
 fi
