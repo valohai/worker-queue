@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+
+EVENT_NAME="$1"
+[ "$EVENT_NAME" = "live-updated" ] || exit 42
+
+# Read Redis password and TLS cert file from Redis config
+REDIS_PASSWORD=$(grep '^requirepass ' /etc/redis/redis.conf | awk '{print $2}')
+TLS_CERT_FILE=$(grep '^tls-cert-file ' /etc/redis/redis.conf | awk '{print $2}')
+
+# We need --insecure because the certificate can be expired
+redis-cli --insecure -u "rediss://default:$REDIS_PASSWORD@localhost:63790" config set tls-cert-file "$TLS_CERT_FILE"
