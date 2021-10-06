@@ -24,6 +24,8 @@ COPY acmetool/acmetool-responses.yaml /var/lib/acme/conf/responses
 
 RUN acmetool quickstart
 
+COPY redis/tls-reload /usr/libexec/acme/hooks/tls-reload
+
 # Install worker queue startup script
 
 COPY run_worker_queue.sh /usr/local/bin/run_worker_queue.sh
