@@ -44,15 +44,17 @@ cat << EOM > /etc/systemd/system/worker-queue.service
 Description=Valohai Worker Queue
 After=docker.service
 Requires=docker.service
+StartLimitIntervalSec=0
+StartLimitBurst=3
 
 [Service]
 Restart=always
+RestartSec=300
 ExecStart=/usr/bin/docker run --rm \
                               --name %n \
                               --network host \
                               --mount source=acme,target=/var/lib/acme \
                               --mount source=redis,target=/var/lib/redis \
-                              --init \
                               -e QUEUE_ADDRESS=$QUEUE_ADDRESS \
                               -e REDIS_PASSWORD=$REDIS_PASSWORD \
                               $DOCKER_IMAGE
