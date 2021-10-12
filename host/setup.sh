@@ -10,6 +10,12 @@ if [ -z "$REDIS_PASSWORD" ]; then
     exit 1
 fi
 
+# Be explicit about the Redis TLS port we want
+if [ -z "$REDIS_PORT" ]; then
+    # Default to 63790
+    REDIS_PORT=63790
+fi
+
 # Make bash more strict about errors
 set -euo pipefail
 
@@ -57,6 +63,7 @@ ExecStart=/usr/bin/docker run --rm \
                               --mount source=redis,target=/var/lib/redis \
                               -e QUEUE_ADDRESS=$QUEUE_ADDRESS \
                               -e REDIS_PASSWORD=$REDIS_PASSWORD \
+                              -e REDIS_PORT=$REDIS_PORT \
                               $DOCKER_IMAGE
 ExecStop=/usr/bin/docker stop %n
 

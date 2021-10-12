@@ -18,7 +18,7 @@ Publish: `./publish.sh`
 
 > :warning: The worker queue host machine needs to have port 80 open to the internet and port 63790 open to Valohai (roi) and workers (peon)!
 
-Installing the worker queue on a machine is as easy as running: `curl https://raw.githubusercontent.com/valohai/worker-queue/main/host/setup.sh | sudo QUEUE_ADDRESS=your-queue-address-here REDIS_PASSWORD=your-redis-password-here bash`
+Installing the worker queue on a machine is as easy as running: `curl https://raw.githubusercontent.com/valohai/worker-queue/main/host/setup.sh | sudo QUEUE_ADDRESS=your-queue-address-here REDIS_PASSWORD=your-redis-password-here REDIS_PORT=redis-tls-port bash`
 
 This installs Docker and creates a systemd service that runs the worker queue with the given parameters.
 
