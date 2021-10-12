@@ -23,5 +23,6 @@ fi
 
 sed -i "s|# requirepass foobared|requirepass $REDIS_PASSWORD|" /etc/redis/redis.conf
 sed -i "s|FILL_ADDRESS|$QUEUE_ADDRESS|" /etc/redis/redis.conf
+sed -i "s|# tls-port 63790|tls-port $REDIS_PORT|" /etc/redis/redis.conf
 
 exec redis-server /etc/redis/redis.conf
