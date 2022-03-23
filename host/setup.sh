@@ -1,19 +1,18 @@
 #!/bin/bash
 
-if [ -z "$QUEUE_ADDRESS" ]; then
-    >&2 echo "QUEUE_ADDRESS not set"
-    exit 1
-fi
-
 if [ -z "$REDIS_PASSWORD" ]; then
     >&2 echo "REDIS_PASSWORD not set"
     exit 1
 fi
 
+if [ -z "$DOCKER_IMAGE" ]; then
+    DOCKER_IMAGE=valohai/worker-queue:latest
+else
+    DOCKER_IMAGE=$DOCKER_IMAGE
+fi
+
 # Make bash more strict about errors
 set -euo pipefail
-
-DOCKER_IMAGE=valohai/worker-queue:latest
 
 # Upgrade system
 
