@@ -21,8 +21,8 @@ fi
 # so we start the cron daemon
 /usr/sbin/cron
 
-sed -i "s|# requirepass foobared|requirepass $REDIS_PASSWORD|" /etc/redis/redis.conf
+sed -i "s|requirepass REDIS_PASSWORD|requirepass $REDIS_PASSWORD|" /etc/redis/redis.conf
 sed -i "s|FILL_ADDRESS|$QUEUE_ADDRESS|" /etc/redis/redis.conf
-sed -i "s|# tls-port 63790|tls-port $REDIS_PORT|" /etc/redis/redis.conf
+sed -i "s|tls-port TLS_PORT|tls-port $REDIS_PORT|" /etc/redis/redis.conf
 
 exec redis-server /etc/redis/redis.conf
