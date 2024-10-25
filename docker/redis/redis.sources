@@ -1,5 +1,0 @@
-Types: deb
-URIs: http://ppa.launchpad.net/redislabs/redis/ubuntu
-Suites: groovy
-Components: main
-Signed-By: /usr/local/share/keyrings/redis-archive-keyring.asc
