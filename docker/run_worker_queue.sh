@@ -10,6 +10,11 @@ if [ -z "$REDIS_PASSWORD" ]; then
     exit 1
 fi
 
+if [ -z "$REDIS_PORT" ]; then
+    >&2 echo "REDIS_PORT not set, defaulting to 63790"
+    REDIS_PORT=63790
+fi
+
 # Make bash more strict about errors
 set -euo pipefail
 
