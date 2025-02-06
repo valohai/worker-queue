@@ -1,22 +1,19 @@
-FROM ubuntu:20.10
+FROM debian:bookworm-slim
 
-# Update base
+# Update base, install redis and dependencies
 
-RUN apt-get update && apt-get upgrade -y
-
-# Install redis
-
-COPY redis/redis.sources /etc/apt/sources.list.d/redis.sources
-
-COPY redis/redis-archive-keyring.asc /usr/local/share/keyrings/redis-archive-keyring.asc
-
-RUN apt-get update && apt-get install redis-server -y
+RUN \
+    apt-get update -q && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends ca-certificates cron libcap2 nano redis-server && \
+    rm -rf /var/lib/apt/lists/* && \
+    find /var/cache -name '*-old' -print -delete && \
+    # check that we have the right version of redis
+    redis-server --version | grep v=7
 
 COPY redis/redis.conf /etc/redis/redis.conf
 
 # Install acmetool
-
-RUN apt-get install -y ca-certificates cron libcap2
 
 COPY acmetool/acmetool-v2-beta-linux /usr/bin/acmetool
 

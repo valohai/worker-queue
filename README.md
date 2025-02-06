@@ -2,9 +2,9 @@
 
 This repository contains a Dockerfile for building the Valohai Worker queue and scripts to deploy the queue.
 
-The Docker image built is based on the official Ubuntu 20.04 image and contains:
+The Docker image built is based on the official Debian Bookworm image and contains:
 
-- Redis (version 6+)
+- Redis (version 7+)
 - acmetool (modified for ACMEv2 support)
 - a startup script that wants the specified SSL certificate and runs Redis with the given password
 
